@@ -4,11 +4,18 @@
 {% block content %}
     {% for post in posts %}
         <div class="post">
+            
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            {% if post.image %}
+                <a href="{{post.image.url}}"><img src="{{post.image.url}}" width="300px" ></a> 
+            {% endif %}
+            <br><br>
+            <div class="caixa-rolagem">
+                <p>{{ post.text|linebreaksbr }}</p>
+            </div>
             <div class="date">
                 <p>published: {{ post.published_date }}</p>
             </div>
-            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-            <p>{{ post.text|linebreaksbr }}</p>
         </div>
     {% endfor %}
 {% endblock %}
